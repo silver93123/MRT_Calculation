@@ -71,7 +71,7 @@ for p in df_std_total['Position'].unique():
     for i,c in enumerate(df.columns[:-1]):
         df_2 = pd.DataFrame()
         df_2['Standard error'] =np.array(df[c])
-        df_2['Number of input surface'] = c
+        df_2['Number of input surfagitce'] = c
         df_1 = pd.concat((df_1, df_2))
     df_1['Position'] = p
     std_total_sns = pd.concat((std_total_sns,df_1))

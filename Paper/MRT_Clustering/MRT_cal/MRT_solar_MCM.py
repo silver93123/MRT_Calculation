@@ -1,14 +1,11 @@
 import matplotlib.pyplot as plt
 from sklearn import preprocessing
-from eppy.modeleditor import IDF
-from eppy.runner.run_functions import runIDFs
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib
 matplotlib.use('Qt5Agg')
-from pythermalcomfort import utilities
-import pythermalcomfort
+
 import pvlib as pv
 import random
 import datetime
@@ -44,16 +41,6 @@ def cal_span(c_1_min, c_1_max, c_2_min, c_2_max, c_3, N_split, plane,direction, 
     area = (c_1_max-c_1_min)*(c_2_max-c_2_min)
     norm_vector = cal_normal_vector(vector_span, direction)
     return vector_span, area, name, norm_vector
-def matrix_rotation_xyz(angle_x, angle_y):
-    rotation_x = np.array([[1, 0, 0],
-                           [0, np.cos(angle_x), -1*np.sin(angle_x)],
-                           [0, np.sin(angle_x), np.cos(angle_x)]])
-
-    rotation_y = np.array([[np.cos(angle_y), 0, np.sin(angle_y)],
-                           [0, 1, 0],
-                           [-1*np.sin(angle_y), 0, np.cos(angle_y)]])
-    rotation = rotation_x.dot(rotation_y)
-    return rotation
 def cal_VewFactor_point(point, span_list):
     name_list = [n[2] for n in span_list]
     point_1 = point
@@ -87,14 +74,6 @@ def cal_VewFactor_point(point, span_list):
         viewF_dA1_A2_s = pd.Series(viewF_dA1_A2, index=name_list, name=str(j))
         df_point_VF = pd.concat([df_point_VF, viewF_dA1_A2_s], axis=1)
     return df_point_VF
-def cal_mrt(temp, VewFactor, name_list):
-    test_temp = pd.Series(temp, index=name_list, name='temp')
-    Temp_pr_list = np.zeros((len(VewFactor.columns)))
-    for i in range(len(VewFactor.columns)):
-        Temp_pr = (VewFactor[VewFactor.columns[i]]*((test_temp+273)**4)).sum()
-        Temp_pr_list[i]= Temp_pr**0.25
-    mrt = (0.18*(Temp_pr_list[2]+Temp_pr_list[5])+0.22*(Temp_pr_list[0]+Temp_pr_list[3])+0.30*(Temp_pr_list[1]+Temp_pr_list[4]))/(2*0.7)
-    return mrt - 273
 def cal_mrt_c(temp_pr):
     mrt = (0.18*(temp_pr[2]+temp_pr[5])+0.22*(temp_pr[0]+temp_pr[3])+0.30*(temp_pr[1]+temp_pr[4]))/(2*0.7)
     return mrt
