@@ -8,7 +8,7 @@ matplotlib.use('Qt5Agg')
 import pvlib as pv
 import random
 import datetime
-import MRT_cal.MRT_cal as MRT_cal
+import MRT.MRT_cal as MRT_cal
 
 #%% """경계조건-기하"""
 N_split = 40
@@ -52,7 +52,7 @@ list_name_new = ['WALL_N','WALL_E','WALL_S','WIN_S', 'WALL_W','FLOOR','CEILING',
                  'Solar_Azimuth','Solar_Altitude',
                  'Indoor_Beam_Solar', 'Indoor_Diffuse_Solar', 'MRT',
                  'cos_solar_S','cos_solar_W','cos_solar_E', 'Relative_Humidity', 'Indoor_AirTemperature']
-fileName = 'C:/Users/silve/PycharmProjects/SilverGit/Paper/MRT_Clustering/MRT_cal/West_controlled_v3.csv'
+fileName = '/Paper/MRT_Clustering/MRT/West_controlled_v3.csv'
 output = MRT_cal.output_open(fileName, list_name_result,list_name_new)
 temp_surface = output[['WALL_N', 'WALL_E', 'WALL_S', 'WIN_S', 'WALL_W', 'FLOOR', 'CEILING']]
 
@@ -65,4 +65,5 @@ vf = MRT_cal.cal_VewFactor_point(np.array(obj_p), span_list,N_split)
 vf_T = vf.T
 vf_T['WALL_S'] = vf_T['WALL_S'] - vf_T['WIN_S']
 vf_r = vf_T.T
-df_mrt_real = MRT_cal.cal_MRT(vf_r, temp_surface,output,1, obj_p_sol, x_w, z_w, L_w, H_w )[0]
+
+df_mrt_real = MRT_cal.cal_MRT(vf_r, temp_surface, output, 1, obj_p_sol, x_w, z_w, L_w, H_w )[0]
