@@ -5,7 +5,6 @@ import pandas as pd
 import pvlib as pv
 import random
 
-
 #%% """함수"""
 def cal_normal_vector(Plane, direction):
     return direction*np.cross((Plane[1] - Plane[-1]), (Plane[1] - Plane[-2])) \
