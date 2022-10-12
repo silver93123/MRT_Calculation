@@ -106,10 +106,10 @@ def random_dataset(c_sample, group_i):
             randomSelect_data[i] = group_i[j][int(randomSelect_index[i])]
         df = pd.concat([df, randomSelect_data], axis=1)
     return df
-def output_open(output_csv, list_name_result,list_name_new):
+def output_open(output_csv, list_name_result,list_name_new, time_start, time_end):
     df = pd.read_csv(output_csv)[list_name_result]
     df_result = df.rename(columns=dict(zip(list_name_result, list_name_new)))
-    df_result.index = pd.date_range('2022-01-01 01:00', '2023-1-1 00:00', freq='1H')
+    df_result.index = pd.date_range(time_start, time_end, freq='1H')
     df_result['Indoor Solar Irradiation[W/m²]'] = df_result['Indoor_Beam_Solar'] + df_result['Indoor_Diffuse_Solar']
     df_result['hour'] = df_result.index.hour
     df_result['month'] = df_result.index.month

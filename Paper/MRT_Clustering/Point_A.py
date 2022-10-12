@@ -1,14 +1,7 @@
-import matplotlib.pyplot as plt
-from sklearn import preprocessing
 import numpy as np
-import pandas as pd
-import seaborn as sns
 import matplotlib
-matplotlib.use('Qt5Agg')
-import pvlib as pv
-import random
-import datetime
 import MRT.MRT_cal as MRT_cal
+matplotlib.use('Qt5Agg')
 
 #%% """경계조건-기하"""
 N_split = 40
@@ -19,7 +12,6 @@ WALL_W = MRT_cal.cal_span(0, 6, 0, 2.4, 3, N_split, 'yz',1, 'WALL_W')
 WALL_N = MRT_cal.cal_span(0, 3, 0, 2.4, 0, N_split, 'xz',1, 'WALL_N')
 WALL_S = MRT_cal.cal_span(0, 3, 0, 2.4, 6, N_split, 'xz',-1, 'WALL_S')
 WIN_S = MRT_cal.cal_span(0.8, 2.3, 0.8, 1.8, 6, N_split, 'xz',-1, 'WIN_S')
-# WIN_W = cal_span(0.5, 4.5, 0.7, 1.9, 3, N_split, 'yz',1, 'WIN_W')
 span_list = [WALL_N, WALL_E, WALL_S, WIN_S, WALL_W, FLOOR, CEILING] #['WALL_N','WALL_E', 'WALL_S', 'WIN_S', 'WALL_W', 'FLOOR', 'CEILING']
 name_list =[n[2] for n in span_list]
 #%% 경계조건 체크
@@ -52,8 +44,10 @@ list_name_new = ['WALL_N','WALL_E','WALL_S','WIN_S', 'WALL_W','FLOOR','CEILING',
                  'Solar_Azimuth','Solar_Altitude',
                  'Indoor_Beam_Solar', 'Indoor_Diffuse_Solar', 'MRT',
                  'cos_solar_S','cos_solar_W','cos_solar_E', 'Relative_Humidity', 'Indoor_AirTemperature']
-fileName = '/Paper/MRT_Clustering/MRT/West_controlled_v3.csv'
-output = MRT_cal.output_open(fileName, list_name_result,list_name_new)
+fileName = 'C:/Users/silve/PycharmProjects/SilverGit/Paper/MRT_Clustering/InputData/West_controlled_v3.csv'
+
+time_start, time_end = '2022-01-01 01:00', '2023-1-1 00:00'
+output = MRT_cal.output_open(fileName, list_name_result, list_name_new, time_start, time_end)
 temp_surface = output[['WALL_N', 'WALL_E', 'WALL_S', 'WIN_S', 'WALL_W', 'FLOOR', 'CEILING']]
 
 #%% mrt_real
@@ -65,5 +59,7 @@ vf = MRT_cal.cal_VewFactor_point(np.array(obj_p), span_list,N_split)
 vf_T = vf.T
 vf_T['WALL_S'] = vf_T['WALL_S'] - vf_T['WIN_S']
 vf_r = vf_T.T
-
 df_mrt_real = MRT_cal.cal_MRT(vf_r, temp_surface, output, 1, obj_p_sol, x_w, z_w, L_w, H_w )[0]
+
+#%%
+df_mrt_real.plot()
