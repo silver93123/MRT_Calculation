@@ -1,4 +1,5 @@
-# MRT(mean radiant temperature)_calulation
+# MRT(mean radiant temperature) calulation
 - 3D View Factor calulation
-- Shading Factor calulation
-- MRT calulation using plane radiant temperatur
+- Solar Shading Factor calulation
+- MRT calulation using plane radiant temperature
+- Delta MRT by solar radiation
