@@ -14,6 +14,7 @@ WALL_S = MRT_cal.cal_span(0, 3, 0, 2.4, 6, N_split, 'xz',-1, 'WALL_S')
 WIN_S = MRT_cal.cal_span(0.8, 2.3, 0.8, 1.8, 6, N_split, 'xz',-1, 'WIN_S')
 span_list = [WALL_N, WALL_E, WALL_S, WIN_S, WALL_W, FLOOR, CEILING] #['WALL_N','WALL_E', 'WALL_S', 'WIN_S', 'WALL_W', 'FLOOR', 'CEILING']
 name_list =[n[2] for n in span_list]
+
 #%% 경계조건 체크
 MRT_cal.Check_GeoBC(span_list,FLOOR,N_split)
 
