@@ -5,3 +5,4 @@
 - Delta MRT by solar radiation
 
 ![Geo_condition](./Paper/MRT_Clustering/image/GeoBC2.PNG)
+![result](./Paper/MRT_Clustering/image/MRT.PNG)
