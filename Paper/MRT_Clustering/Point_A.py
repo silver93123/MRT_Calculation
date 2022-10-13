@@ -15,6 +15,7 @@ WALL_S = MRT_cal.cal_span(0, 3, 0, 2.4, 6, N_split, 'xz',-1, 'WALL_S')
 WIN_S = MRT_cal.cal_span(0.8, 2.3, 0.8, 1.8, 6, N_split, 'xz',-1, 'WIN_S')
 span_list = [WALL_N, WALL_E, WALL_S, WIN_S, WALL_W, FLOOR, CEILING] #['WALL_N','WALL_E', 'WALL_S', 'WIN_S', 'WALL_W', 'FLOOR', 'CEILING']
 name_list =[n[2] for n in span_list]
+
 #%% 경계조건 체크
 MRT_cal.Check_GeoBC(span_list,FLOOR,N_split)
 
@@ -46,7 +47,6 @@ list_name_new = ['WALL_N','WALL_E','WALL_S','WIN_S', 'WALL_W','FLOOR','CEILING',
                  'Indoor_Beam_Solar', 'Indoor_Diffuse_Solar', 'MRT',
                  'cos_solar_S','cos_solar_W','cos_solar_E', 'Relative_Humidity', 'Indoor_AirTemperature']
 fileName = 'C:/Users/silve/PycharmProjects/SilverGit/Paper/MRT_Clustering/InputData/West_controlled_v3.csv'
-
 time_start, time_end = '2022-01-01 01:00', '2023-1-1 00:00'
 output = MRT_cal.output_open(fileName, list_name_result, list_name_new, time_start, time_end)
 temp_surface = output[['WALL_N', 'WALL_E', 'WALL_S', 'WIN_S', 'WALL_W', 'FLOOR', 'CEILING']]
