@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib
 import MRT.MRT_cal as MRT_cal
-matplotlib.use('Qt5Agg')
+matplotlib.use('Qt5Agg') #  dddd
+
 
 #%% """경계조건-기하"""
 N_split = 40
