@@ -4,4 +4,4 @@
 - MRT calulation using plane radiant temperature
 - Delta MRT by solar radiation
 
-!(./Paper/MRT_Clustering/image/GeoBC2.PNG)
+![Geo_condition](./Paper/MRT_Clustering/image/GeoBC2.PNG)
