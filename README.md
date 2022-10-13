@@ -3,3 +3,5 @@
 - Solar Shading Factor calulation
 - MRT calulation using plane radiant temperature
 - Delta MRT by solar radiation
+
+!(/Paper/MRT_Clustering/image/GeoBC2.PNG)
